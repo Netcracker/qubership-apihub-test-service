@@ -1,17 +1,3 @@
-// Copyright 2024-2025 NetCracker Technology Corporation
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 package main
 
 import (
@@ -75,6 +61,7 @@ func main() {
 	r.HandleFunc("/v3/api-docs/md", openapiController.GetMdFile).Methods(http.MethodGet)
 	r.HandleFunc("/v3/api-docs/json", openapiController.GetJsonSample).Methods(http.MethodGet)
 	r.HandleFunc("/v3/api-docs/async", asyncapiController.GetAsyncapiYamlSpec).Methods(http.MethodGet)
+	r.HandleFunc("/v3/api-docs/async/json", asyncapiController.GetAsyncapiJsonSpec).Methods(http.MethodGet)
 	r.HandleFunc("/graphql", graphqlController.GetGraphqlSpec).Methods(http.MethodGet)
 	r.HandleFunc("/api/graphql-server/schema", graphqlController.GetGraphqlIntrospection).Methods(http.MethodPost)
 
