@@ -45,19 +45,6 @@ type Query
         exposeRootQuoteItems:Boolean
     ): Quote
 
-    #List fullTextQuoteSearch Query
-    """
-    This operation lists Quotes using full text search functionality. The system searches for the text entered by the user across all Quotes for full equality. .
-    """
-    fullTextQuoteSearch (
-        """Is searched string"""
-        query: String!
-
-        """Allows to get Quote Items of Quotes with only related TOP Product Offerings"""
-
-        exposeRootQuoteItems:Boolean
-    ): [Quote!]
-
     #List FullTextQuoteStatisticsSearch Query
 
     """This operation lists Quotes using full text search functionality."""
