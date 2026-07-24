@@ -45,18 +45,6 @@ type Query
         exposeRootQuoteItems:Boolean
     ): Quote
 
-    #List fullTextQuoteSearch Query
-    """
-    This operation lists Quotes using full text search functionality. The system searches for the text entered by the user across all Quotes for full equality. .
-    """
-    fullTextQuoteSearch (
-        """Is searched string"""
-        query: String!
-
-        """Allows to get Quote Items of Quotes with only related TOP Product Offerings"""
-
-        exposeRootQuoteItems:Boolean
-    ): [Quote!]
 
     #List FullTextQuoteStatisticsSearch Query
 
@@ -388,7 +376,7 @@ type Query
 
     listAssociations(
 
-        """Source object type of the association. The following types are supported: "ProductOffering"."""
+        """Source object type of the association. The following types are supported: "ProductOffering", "TangibleProduct"."""
 
         fromType: String!
 
@@ -409,6 +397,34 @@ type Query
         id: String!
 
     ): Association
+
+    #GetTangibleProduct Query
+
+    """This operation retrieves tangible product by id."""
+
+    getTangibleProduct(
+
+        """Unique identifier of tangible product."""
+
+        id: String!
+
+    ): TangibleProduct
+
+    #ListTangibleProduct Query
+
+    """This operation lists tangible products."""
+
+    listTangibleProducts(
+
+        """Tangible products category"""
+
+        categoryId: String!,
+
+        """The parameter is used to filter arrays of LocalizedData"""
+
+        locale: String
+
+    ): [TangibleProduct!]
 
     #Session Context Service Queries
 
@@ -7680,7 +7696,7 @@ type LocalizedMeta {
 
 #Association Type
 
-"""An association represents a compatibility rule between two products. For example, it can represent a compatibility rule between product offerings."""
+"""An association represents a compatibility rule between two products. For example, it can represent a compatibility rule between a product offering and its tangible product."""
 
 type Association{
 
@@ -7692,7 +7708,7 @@ type Association{
 
     fromId: String
 
-    """Source object type of the association. The following types are supported: Product Offering"""
+    """Source object type of the association. The following types are supported: Product Offering, Tangible Product"""
 
     fromType: String
 
@@ -7705,7 +7721,7 @@ type Association{
     toId: String
 
     """Target object type of the association.
-    The following types are supported: Product Offering"""
+    The following types are supported: Product Offering, Tangible Product"""
 
     toType: String
 
@@ -7736,6 +7752,42 @@ type AssociationType{
     """Name of the association type (for example, up-sale or cross-sale)"""
 
     name: String
+
+}
+
+#TangibleProduct Type
+
+"""A tangible product serves for grouping tangible product offerings of the same kind but with different characteristics and features (for example, the same model of mobile phone with different memory size or color)."""
+
+type TangibleProduct{
+
+    """Indicates the type of entity. For tangible product, this will be ‘TangibleProduct’."""
+
+    atType: String
+
+    """List of categories (product catalogs) that contain Tangible Product"""
+
+    category: [String!]
+
+    """Unique identifier of TangibleProduct"""
+
+    id: String
+
+    """Name of the TangibleProduct"""
+
+    name: String
+
+    """List of product offerings ids in TangibleProduct"""
+
+    productOffering: [String!]
+
+    """Link to appropriate localization data. Used for name, description localization in UI."""
+
+    localizedName: LocalizedData
+
+    """EnrichmentContainer that contains enrichments for this TangibleProduct."""
+
+    enrichmentContainer: EnrichmentContainer
 
 }
 
@@ -7797,4 +7849,3 @@ type DeliveryItem {
     contactMedium: ContactMedium
 
 }
-
