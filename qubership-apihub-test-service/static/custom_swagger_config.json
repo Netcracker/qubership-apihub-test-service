@@ -5,6 +5,7 @@
             "url":"/v3/api-docs",
             "name":"OpenAPI json specification",
             "x-api-kind":"no-BWC",
+            "labels": ["apihub/x-api-kind: no-BWC"],
             "type":"openapi-3-0"
         },
         {
