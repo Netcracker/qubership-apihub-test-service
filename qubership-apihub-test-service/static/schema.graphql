@@ -3,7 +3,6 @@ directive @limit(offset: Int = 0, limit: Int = 20) on FIELD | FIELD_DEFINITION
 type Todo {
   id: ID!
   name: String!
-  completed: Boolean
   color: Color
 
   "A field that requires an argument"
@@ -13,9 +12,6 @@ type Todo {
 enum Color {
   "Red color"
   RED
-
-  "Green color"
-  GREEN
 }
 
 input TodoInputType {
@@ -28,9 +24,6 @@ type Query {
   "A Query with 1 required argument and 1 optional argument"
   todo(
     id: ID!
-
-    "A default value of false"
-    isCompleted: Boolean = false
   ): Todo
 
   """

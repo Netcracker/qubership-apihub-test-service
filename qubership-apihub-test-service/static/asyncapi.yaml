@@ -22,28 +22,6 @@ servers:
     tags:
       - name: manual
 channels:
-  '${service_name}-cache-reload-v2.*':
-    address: '${service_name}-cache-reload-v2.*'
-    title: '${service_name}-cache-reload-v2.*'
-    description: Queue to receive catalog cache reload messaged
-    servers:
-      - $ref: '#/servers/rabbitmq-manual'
-    parameters:
-      service_name:
-        description: Service Name
-    messages:
-      reload-cache-message:
-        $ref: '#/components/messages/reload-cache-message'
-    bindings:
-      amqp:
-        bindingVersion: 0.3.0
-        is: queue
-        queue:
-          durable: false
-          exclusive: false
-          autoDelete: true
-          vhost: /
-          x-type: quorum
   <archive_confirm_topic>:
     address: <archive_confirm_topic>
     title: <archive_confirm_topic>
@@ -91,25 +69,6 @@ channels:
           durable: true
           autoDelete: false
           vhost: /
-  cache-reload-dlq-v2:
-    address: cache-reload-dlq-v2
-    title: cache-reload-dlq-v2
-    description: DQL Queue for catalog cache reload messaged
-    servers:
-      - $ref: '#/servers/rabbitmq-manual'
-    bindings:
-      amqp:
-        bindingVersion: 0.3.0
-        is: queue
-        queue:
-          durable: true
-          exclusive: false
-          autoDelete: false
-          vhost: /
-          x-type: quorum
-          x-dead-letter: true
-          x-channel-bindings:
-            - channelAddress: cache-reload-dlx-v2
   document-modify-v2:
     address: document-modify-v2
     title: document-modify-v2
@@ -293,15 +252,6 @@ operations:
     messages:
       - $ref: >-
           #/channels/document-storage.snapshoting-v2/messages/ChangeDocumentStateDto
-  reload-cache-message-listener:
-    action: receive
-    channel:
-      $ref: '#/channels/${service_name}-cache-reload-v2.*'
-    title: '${service_name}-cache-reload-v2.* receive'
-    description: Catalog cache reload messaged listener
-    messages:
-      - $ref: >-
-          #/channels/${service_name}-cache-reload-v2.*/messages/reload-cache-message
 components:
   schemas:
     ArchivingTrackingStoreEvent:
@@ -2798,8 +2748,3 @@ components:
       name: SnapshotSaveEvent
       title: SnapshotSaveEvent
       description: SnapshotSaveEvent message
-    reload-cache-message:
-      payload:
-        $ref: '#/components/schemas/ReloadCacheMessage'
-      name: ReloadCacheMessage
-      title: ReloadCacheMessage
