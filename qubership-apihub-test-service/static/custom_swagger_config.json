@@ -2,34 +2,14 @@
     "configUrl": "/v3/api-docs/apihub-swagger-config",
     "urls": [
         {
-            "url":"/publication-errors/rest-a-petstore.yaml",
-            "name":"rest-a-petstore",
-            "type":"openapi-3-0"
-        },
-        {
             "url":"/publication-errors/rest-b-warehouse.yaml",
             "name":"rest-b-warehouse",
             "type":"openapi-3-0"
         },
         {
-            "url":"/publication-errors/rest-c-warnings.yaml",
-            "name":"rest-c-warnings",
-            "type":"openapi-3-0"
-        },
-        {
-            "url":"/publication-errors/graphql-a-petstore.graphql",
-            "name":"graphql-a-petstore",
-            "type":"graphql"
-        },
-        {
             "url":"/publication-errors/graphql-b-warehouse.graphql",
             "name":"graphql-b-warehouse",
             "type":"graphql"
-        },
-        {
-            "url":"/publication-errors/asyncapi-a-shop-orders.yaml",
-            "name":"asyncapi-a-shop-orders",
-            "type":"asyncapi-3-0"
         },
         {
             "url":"/publication-errors/asyncapi-b-warehouse-stock.yaml",
